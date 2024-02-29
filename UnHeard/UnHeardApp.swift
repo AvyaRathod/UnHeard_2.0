@@ -1,4 +1,15 @@
 import SwiftUI
+import FirebaseCore
+
+
+class AppDelegate: NSObject, UIApplicationDelegate {
+  func application(_ application: UIApplication,
+                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+      FirebaseApp.configure()
+      
+    return true
+  }
+}
 
 class CameraState: ObservableObject {
     var cameraView: CameraView?
@@ -13,6 +24,8 @@ class ModelState: ObservableObject{
 struct UnHeardApp: App {
     @StateObject var cameraState = CameraState()
     @StateObject var modelState = ModelState()
+    
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     var body: some Scene {
         WindowGroup {

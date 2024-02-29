@@ -1,14 +1,17 @@
 import SwiftUI
+import FirebaseStorage
 import FirebaseCore
-
 
 class AppDelegate: NSObject, UIApplicationDelegate {
   func application(_ application: UIApplication,
                    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
       FirebaseApp.configure()
-      
     return true
   }
+}
+
+public class StorageManager: ObservableObject {
+    let storage = Storage.storage(url:"gs://isldictionary")
 }
 
 class CameraState: ObservableObject {

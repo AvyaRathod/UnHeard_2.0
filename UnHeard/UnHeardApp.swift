@@ -13,6 +13,7 @@ class ModelState: ObservableObject{
 struct UnHeardApp: App {
     @StateObject var cameraState = CameraState()
     @StateObject var modelState = ModelState()
+    
     var body: some Scene {
         WindowGroup {
             MainTabView()
@@ -28,7 +29,7 @@ struct MainTabView: View {
     
     var body: some View {
         TabView(selection: $selectedTab) {
-            AlphabetDictionaryView()
+            BucketListView()
                 .tabItem {
                     Label("Dictionary", systemImage: "book")
                 }

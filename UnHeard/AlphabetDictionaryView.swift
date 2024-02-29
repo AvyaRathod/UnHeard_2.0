@@ -43,8 +43,13 @@ extension Sign {
         Sign(word: "Z", imageName: "Z")
     ]
     
+    static let Adjectives = [
+        Sign(word: "X", imageName: "X"),
+    ]
+    
     static let TypeClass = [
         Sign(word:"Alphabets", imageName: nil),
+        Sign(word:"Adjectives", imageName: nil),
         Sign(word:"Days of the week", imageName: nil),
         Sign(word:"People", imageName: nil),
         Sign(word:"Weather", imageName: nil),
@@ -137,33 +142,30 @@ struct AlphabetDictionaryView: View {
     @State private var selectedSign: Sign?
     @State private var isShowingDetail = false
     @State private var showingTypeClassContent: String?
-
+    
     var searchResults: [Sign] {
         if let typeClass = showingTypeClassContent {
             var results = [Sign]()
             switch typeClass {
                 case "Alphabets":
                     results = alphabets
-                // Implement logic for other type classes when their data is defined
                 default:
                     break
             }
-            // If there's a search query, filter the results within the selected type class
             if !searchQuery.isEmpty {
                 results = results.filter { $0.word.lowercased().contains(searchQuery.lowercased()) }
             }
             return results
         } else if searchQuery.isEmpty {
-            // If no type class is selected and there's no search query, show all type classes
             return typeClasses
         } else {
-            // If there's a search query but no type class is selected, search globally
             let filteredAlphabets = alphabets.filter { $0.word.lowercased().contains(searchQuery.lowercased()) }
             let filteredTypeClasses = typeClasses.filter { $0.word.lowercased().contains(searchQuery.lowercased()) }
             return filteredAlphabets + filteredTypeClasses
         }
     }
 
+    //if a particular directory is selected, then display the data from that directory. if search query is empty then display the directories. and else filter the main directory and the 2nd level directory and display the filtered results
     
     private var backButton: some View {
         Group {
@@ -174,7 +176,7 @@ struct AlphabetDictionaryView: View {
                     self.isShowingDetail = false
                 }) {
                     HStack {
-                        Image(systemName: "arrow.left")
+                        Image(systemName: "chevron.left")
                         Text("Back")
                     }
                 }
@@ -243,6 +245,7 @@ struct AlphabetDictionaryView: View {
             )
         }
     }
+    
 }
 
 
@@ -253,16 +256,13 @@ struct SignDetailOverlayView: View {
 
     var body: some View {
         ZStack {
-            // Background dim
             Color.black.opacity(0.5).edgesIgnoringSafeArea(.all).onTapGesture {
                 onClose()
             }
 
-            // Container for the image and text
             VStack {
                 Spacer()
 
-                // Image and Text overlay
                 VStack {
                     Text(sign.word)
                         .font(.largeTitle)

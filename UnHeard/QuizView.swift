@@ -97,9 +97,9 @@ struct QuizView: View {
                     }
                     .frame(maxWidth: .infinity)
                     .background(Color.black.opacity(0.5))
-                    .cornerRadius(25)
+                    .cornerRadius(25, corners: [.topLeft, .topRight])
                     .overlay(
-                        RoundedRectangle(cornerRadius: 25)
+                        RoundedCorner(radius: 25, corners: [.topLeft, .topRight])
                             .stroke(Color.black.opacity(0.5), lineWidth: 1)
                     )
                 }

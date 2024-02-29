@@ -15,7 +15,8 @@
 		417C5AFC2B729C4D00534510 /* QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417C5AFB2B729C4D00534510 /* QuizView.swift */; };
 		417C5AFE2B72B5B000534510 /* AlphabetsImageClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 417C5AFD2B72B5B000534510 /* AlphabetsImageClassifier.mlmodel */; };
 		417C5B002B72CD3D00534510 /* RecognizedTextViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417C5AFF2B72CD3D00534510 /* RecognizedTextViewModel.swift */; };
-		419678022B838B03004C979D /* AlphabetsObjectDetectorYOLO 1 Iteration 2100.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 419678012B838B03004C979D /* AlphabetsObjectDetectorYOLO 1 Iteration 2100.mlmodel */; };
+		419824D12B8EFD38009D858C /* FetchBucketContents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419824D02B8EFD38009D858C /* FetchBucketContents.swift */; };
+		419824D32B8EFDF8009D858C /* BucketContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419824D22B8EFDF8009D858C /* BucketContentView.swift */; };
 		41A7FCE52B6FB228005EBD02 /* AlphabetDictionaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A7FCE42B6FB228005EBD02 /* AlphabetDictionaryView.swift */; };
 /* End PBXBuildFile section */
 
@@ -29,7 +30,8 @@
 		417C5AFB2B729C4D00534510 /* QuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizView.swift; sourceTree = "<group>"; };
 		417C5AFD2B72B5B000534510 /* AlphabetsImageClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = AlphabetsImageClassifier.mlmodel; sourceTree = "<group>"; };
 		417C5AFF2B72CD3D00534510 /* RecognizedTextViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecognizedTextViewModel.swift; sourceTree = "<group>"; };
-		419678012B838B03004C979D /* AlphabetsObjectDetectorYOLO 1 Iteration 2100.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "AlphabetsObjectDetectorYOLO 1 Iteration 2100.mlmodel"; sourceTree = "<group>"; };
+		419824D02B8EFD38009D858C /* FetchBucketContents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchBucketContents.swift; sourceTree = "<group>"; };
+		419824D22B8EFDF8009D858C /* BucketContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BucketContentView.swift; sourceTree = "<group>"; };
 		41A7FCE42B6FB228005EBD02 /* AlphabetDictionaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlphabetDictionaryView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -66,13 +68,14 @@
 				415317542B6CD5EF00E02FF2 /* UnHeardApp.swift */,
 				417C5AFF2B72CD3D00534510 /* RecognizedTextViewModel.swift */,
 				417C5AF92B717BC300534510 /* LiveTyperView.swift */,
+				419824D02B8EFD38009D858C /* FetchBucketContents.swift */,
+				419824D22B8EFDF8009D858C /* BucketContentView.swift */,
 				417C5AFB2B729C4D00534510 /* QuizView.swift */,
 				417C5AF52B714D2200534510 /* LiveStreamView.swift */,
 				417C5AF72B71739200534510 /* CropHands.swift */,
 				41A7FCE42B6FB228005EBD02 /* AlphabetDictionaryView.swift */,
 				415317582B6CD5F100E02FF2 /* Assets.xcassets */,
 				417C5AFD2B72B5B000534510 /* AlphabetsImageClassifier.mlmodel */,
-				419678012B838B03004C979D /* AlphabetsObjectDetectorYOLO 1 Iteration 2100.mlmodel */,
 			);
 			path = UnHeard;
 			sourceTree = "<group>";
@@ -148,13 +151,14 @@
 			files = (
 				417C5AFE2B72B5B000534510 /* AlphabetsImageClassifier.mlmodel in Sources */,
 				415317552B6CD5EF00E02FF2 /* UnHeardApp.swift in Sources */,
-				419678022B838B03004C979D /* AlphabetsObjectDetectorYOLO 1 Iteration 2100.mlmodel in Sources */,
 				417C5AFC2B729C4D00534510 /* QuizView.swift in Sources */,
 				417C5AF82B71739200534510 /* CropHands.swift in Sources */,
 				417C5B002B72CD3D00534510 /* RecognizedTextViewModel.swift in Sources */,
 				417C5AFA2B717BC300534510 /* LiveTyperView.swift in Sources */,
+				419824D32B8EFDF8009D858C /* BucketContentView.swift in Sources */,
 				417C5AF62B714D2300534510 /* LiveStreamView.swift in Sources */,
 				41A7FCE52B6FB228005EBD02 /* AlphabetDictionaryView.swift in Sources */,
+				419824D12B8EFD38009D858C /* FetchBucketContents.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

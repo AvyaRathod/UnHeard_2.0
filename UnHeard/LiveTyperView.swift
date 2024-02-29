@@ -56,9 +56,9 @@ struct LiveTyperView: View {
                 }
                 .frame(maxWidth: .infinity)
                 .background(Color.black.opacity(0.5))
-                .cornerRadius(25)
+                .cornerRadius(25, corners: [.topLeft, .topRight])
                 .overlay(
-                    RoundedRectangle(cornerRadius: 25)
+                    RoundedCorner(radius: 25, corners: [.topLeft, .topRight])
                         .stroke(Color.black.opacity(0.5), lineWidth: 1)
                 )
             }.onTapGesture {
@@ -96,5 +96,21 @@ struct LiveTyperView: View {
             }
             .presentationBackground(Color.black.opacity(0.9))
                     }
+    }
+}
+
+extension View {
+    func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
+        clipShape( RoundedCorner(radius: radius, corners: corners) )
+    }
+}
+
+struct RoundedCorner: Shape {
+    var radius: CGFloat = .infinity
+    var corners: UIRectCorner = .allCorners
+
+    func path(in rect: CGRect) -> Path {
+        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        return Path(path.cgPath)
     }
 }

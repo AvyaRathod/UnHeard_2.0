@@ -7,6 +7,7 @@
 
 import SwiftUI
 import AVKit
+import Combine
 
 struct DirectoryPlacard: View {
     let directory: String
@@ -66,15 +67,13 @@ struct Placard: View {
     }
 }
 
-
-
-
 struct BucketListView: View {
     @StateObject private var viewModel = BucketViewModel()
     @State private var searchQuery = ""
     @State private var selectedWord: String?
     @State private var isShowingDetail = false
     @State private var showingTypeClassContent: String? = nil
+    @State private var videoUrlToShow: String? = nil
     
     private var backButton: some View {
         Group {
@@ -94,15 +93,22 @@ struct BucketListView: View {
     }
     
     private var closeButton: some View {
-            Button(action: {
-                self.isShowingDetail = false
-                self.selectedWord = nil
-            }) {
-                Image(systemName: "xmark")
-                    .imageScale(.large)
-            }
+        Button(action: {
+            self.isShowingDetail = false
+            self.selectedWord = nil
+        }) {
+            Image(systemName: "xmark")
+                .imageScale(.large)
         }
+    }
     
+    private func generateVideoUrlToShow() {
+        if let videoFileName = self.viewModel.videoFilesInDirectories[self.showingTypeClassContent! + "/" + self.selectedWord!] {
+            let encodedVideoFileName = videoFileName.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+            let videoUrl = "https://storage.googleapis.com/isldictionary/\(encodedVideoFileName)"
+            self.videoUrlToShow = videoUrl
+        }
+    }
     var columns: [GridItem] = [
         GridItem(.flexible(), spacing: 20),
         GridItem(.flexible(), spacing: 20)
@@ -133,9 +139,9 @@ struct BucketListView: View {
             }
         }
     }
-
+    
     var body: some View {
-        NavigationView{
+        NavigationView {
             ScrollView {
                 TextField(showingTypeClassContent != nil ? "Search in \(showingTypeClassContent!)" : "Search", text: $searchQuery)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -143,46 +149,38 @@ struct BucketListView: View {
                 
                 LazyVGrid(columns: columns, spacing: 20) {
                     ForEach(searchResults, id: \.self) { directory in
-                        if showingTypeClassContent == nil{
+                        if showingTypeClassContent == nil {
                             DirectoryPlacard(directory: directory)
                                 .onTapGesture {
                                     showingTypeClassContent = directory
-                                    searchQuery=""
+                                    searchQuery = ""
                                 }
-                        }else{
+                        } else {
                             Placard(word: directory)
                                 .onTapGesture {
-                                    self.selectedWord = directory
+                                    self.selectedWord = directory // This should trigger URL generation
+                                    self.generateVideoUrlToShow() // Call the function to generate the URL
                                     self.isShowingDetail = true
                                 }
                         }
                     }
                 }
-                .blur(radius: isShowingDetail ? 20 : 0)
-                .navigationBarTitle(showingTypeClassContent ?? "Sign Dictionary", displayMode: .inline)
-                .navigationBarItems(leading: isShowingDetail ? nil : backButton,
-                                    trailing: isShowingDetail ? closeButton : nil)
-                .overlay(
-                    Group{
-                        if isShowingDetail, let selectedDirectory = showingTypeClassContent, let selectedWord = selectedWord, let videoFileName = viewModel.videoFilesInDirectories["\(selectedWord)"] {
-                            
-                            let videoUrlString = "http://34.120.180.162/isldictionary/Adjectives/1.%20loud/MVI_9536.MOV"
-                            
-                            if let videoUrl = URL(string: videoUrlString) {
-                                VideoPlayerView(videoURL: videoUrl)
-                                    .frame(width: UIScreen.main.bounds.width, height: 300)
-                                    .onDisappear {
-                                        self.isShowingDetail = false
-                                        self.selectedWord = nil
-                                    }
-                                    .transition(.opacity)
-                                    .animation(.easeInOut, value: isShowingDetail)
-                            }
+            }
+            .blur(radius: isShowingDetail ? 20 : 0)
+            .navigationBarTitle(showingTypeClassContent ?? "Sign Dictionary", displayMode: .inline)
+            .navigationBarItems(leading: isShowingDetail ? nil : backButton,
+                                trailing: isShowingDetail ? closeButton : nil)
+            .overlay (
+                Group{
+                    if isShowingDetail{
+                        if let videoUrl = videoUrlToShow, let url = URL(string: videoUrl) {
+                            VideoOverlay(videoUrl: url, selectedWord: selectedWord ?? "")
+                        } else {
+                            Text("Error loading video")
                         }
                     }
-                    
-                )
-            }
+                }
+            )
         }
         .onAppear {
             viewModel.fetchFirstLevelDirectories()
@@ -190,21 +188,63 @@ struct BucketListView: View {
     }
 }
 
-struct VideoPlayerView: UIViewControllerRepresentable {
-    var videoURL: URL
+struct VideoOverlay: View {
+    let videoUrl: URL
+    let selectedWord: String
+    @State private var player = AVPlayer()
+    @State private var playerStatusObserver: AnyCancellable?
 
-    func makeUIViewController(context: Context) -> AVPlayerViewController {
-        let player = AVPlayer(url: videoURL)
-        let playerViewController = AVPlayerViewController()
-        playerViewController.player = player
-        return playerViewController
+    var body: some View {
+        VStack {
+            Text(selectedWord)
+                .font(.title)
+                .padding()
+            Spacer()
+            VideoPlayer(player: player)
+                .onAppear {
+                    setUpVideoPlayer()
+                }
+                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width * 9 / 16)
+                .cornerRadius(12)
+            Spacer()
+        }
     }
 
-    func updateUIViewController(_ uiViewController: AVPlayerViewController, context: Context) {}
+    private func setUpVideoPlayer() {
+        let asset = AVURLAsset(url: videoUrl)
+        
+        // Preload essential properties
+        let keysToLoad = ["playable", "duration"]
+        asset.loadValuesAsynchronously(forKeys: keysToLoad) {
+            var error: NSError? = nil
+            let status = asset.statusOfValue(forKey: "playable", error: &error)
+            if status == .loaded {
+                DispatchQueue.main.async {
+                    let playerItem = AVPlayerItem(asset: asset)
+                    self.player.replaceCurrentItem(with: playerItem)
+                    self.player.isMuted = true
+                    self.player.play()
+                }
+            } else {
+                // Handle error
+                print("Failed to load video asset: \(error?.localizedDescription ?? "Unknown error")")
+            }
+        }
+    }
 }
-
-
 
 #Preview {
     BucketListView()
 }
+
+
+//.sheet(isPresented: $isShowingDetail) {
+//    if let videoUrl = videoUrlToShow, let url = URL(string: videoUrl) {
+//        VideoPlayer(player: AVPlayer(url: url))
+//            .onAppear {
+//                AVPlayer(url: url).play()
+//            }
+//    } else {
+//        Text("Error loading video")
+//    }
+//}

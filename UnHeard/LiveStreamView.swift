@@ -14,7 +14,9 @@ final class CameraView: UIViewController, AVCaptureVideoDataOutputSampleBufferDe
     
     var screenRect:CGRect! = nil
     
-    private var handPoseRequest: VNDetectHumanHandPoseRequest!
+    private var handPoseRequest = VNDetectHumanHandPoseRequest()
+    private var bodyPoseRequest = VNDetectHumanBodyPoseRequest()
+    
     private var predictionModel: VNCoreMLModel!
     private var predictionRequest: VNCoreMLRequest!
     

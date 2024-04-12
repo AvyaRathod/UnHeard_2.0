@@ -8,8 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		4115B7142B91D43F00D9115D /* VideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4115B7132B91D43F00D9115D /* VideoPlayer.swift */; };
+		4140EA302BBEAA730002B323 /* ImageProcessingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140EA2F2BBEAA730002B323 /* ImageProcessingView.swift */; };
+		4140EA322BBEBAAD0002B323 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4140EA312BBEBAAD0002B323 /* CameraView.swift */; };
 		415317552B6CD5EF00E02FF2 /* UnHeardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415317542B6CD5EF00E02FF2 /* UnHeardApp.swift */; };
 		415317592B6CD5F100E02FF2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 415317582B6CD5F100E02FF2 /* Assets.xcassets */; };
+		4179611A2BC2BBA700A6AB40 /* SemaphoreQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417961192BC2BBA700A6AB40 /* SemaphoreQueue.swift */; };
 		417C5AF62B714D2300534510 /* LiveStreamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417C5AF52B714D2200534510 /* LiveStreamView.swift */; };
 		417C5AF82B71739200534510 /* CropHands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417C5AF72B71739200534510 /* CropHands.swift */; };
 		417C5AFA2B717BC300534510 /* LiveTyperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417C5AF92B717BC300534510 /* LiveTyperView.swift */; };
@@ -23,9 +26,12 @@
 
 /* Begin PBXFileReference section */
 		4115B7132B91D43F00D9115D /* VideoPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayer.swift; sourceTree = "<group>"; };
+		4140EA2F2BBEAA730002B323 /* ImageProcessingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProcessingView.swift; sourceTree = "<group>"; };
+		4140EA312BBEBAAD0002B323 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		415317512B6CD5EF00E02FF2 /* UnHeard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UnHeard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		415317542B6CD5EF00E02FF2 /* UnHeardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnHeardApp.swift; sourceTree = "<group>"; };
 		415317582B6CD5F100E02FF2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		417961192BC2BBA700A6AB40 /* SemaphoreQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemaphoreQueue.swift; sourceTree = "<group>"; };
 		417C5AF52B714D2200534510 /* LiveStreamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveStreamView.swift; sourceTree = "<group>"; };
 		417C5AF72B71739200534510 /* CropHands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CropHands.swift; sourceTree = "<group>"; };
 		417C5AF92B717BC300534510 /* LiveTyperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveTyperView.swift; sourceTree = "<group>"; };
@@ -67,6 +73,8 @@
 		415317532B6CD5EF00E02FF2 /* UnHeard */ = {
 			isa = PBXGroup;
 			children = (
+				4140EA312BBEBAAD0002B323 /* CameraView.swift */,
+				417961192BC2BBA700A6AB40 /* SemaphoreQueue.swift */,
 				415317542B6CD5EF00E02FF2 /* UnHeardApp.swift */,
 				417C5AFF2B72CD3D00534510 /* RecognizedTextViewModel.swift */,
 				417C5AF92B717BC300534510 /* LiveTyperView.swift */,
@@ -75,6 +83,7 @@
 				4115B7132B91D43F00D9115D /* VideoPlayer.swift */,
 				417C5AFB2B729C4D00534510 /* QuizView.swift */,
 				417C5AF52B714D2200534510 /* LiveStreamView.swift */,
+				4140EA2F2BBEAA730002B323 /* ImageProcessingView.swift */,
 				417C5AF72B71739200534510 /* CropHands.swift */,
 				41A7FCE42B6FB228005EBD02 /* AlphabetDictionaryView.swift */,
 				415317582B6CD5F100E02FF2 /* Assets.xcassets */,
@@ -157,13 +166,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4179611A2BC2BBA700A6AB40 /* SemaphoreQueue.swift in Sources */,
 				417C5AFE2B72B5B000534510 /* AlphabetsImageClassifier.mlmodel in Sources */,
 				415317552B6CD5EF00E02FF2 /* UnHeardApp.swift in Sources */,
+				4140EA322BBEBAAD0002B323 /* CameraView.swift in Sources */,
 				417C5AFC2B729C4D00534510 /* QuizView.swift in Sources */,
 				417C5AF82B71739200534510 /* CropHands.swift in Sources */,
 				417C5B002B72CD3D00534510 /* RecognizedTextViewModel.swift in Sources */,
 				417C5AFA2B717BC300534510 /* LiveTyperView.swift in Sources */,
 				419824D32B8EFDF8009D858C /* BucketContentView.swift in Sources */,
+				4140EA302BBEAA730002B323 /* ImageProcessingView.swift in Sources */,
 				417C5AF62B714D2300534510 /* LiveStreamView.swift in Sources */,
 				41A7FCE52B6FB228005EBD02 /* AlphabetDictionaryView.swift in Sources */,
 				4115B7142B91D43F00D9115D /* VideoPlayer.swift in Sources */,
@@ -309,6 +321,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -338,6 +351,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
